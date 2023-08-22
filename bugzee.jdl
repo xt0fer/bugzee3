@@ -30,9 +30,13 @@ entity Attachment {
   name String required minlength(3)
   file Blob
 }
+entity Danielle {
+  name String required minlength(3)
+}
 
 relationship ManyToMany {
   Ticket{label(label)} to Label{ticket}
+  Ticket{label(label)} to Danielle{ticket}  
 }
 
 relationship ManyToOne {

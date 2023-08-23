@@ -1,0 +1,9 @@
+{
+  "bugzee3App": {
+    "Type": {
+      "null": "",
+      "BUG": "Bug",
+      "FEATURE": "Feature"
+    }
+  }
+}

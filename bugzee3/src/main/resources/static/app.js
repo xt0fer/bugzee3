@@ -11,7 +11,7 @@ function fetchTicketsData() {
         })
         .catch((error) => {
             console.log(`Error Fetching data : ${error}`)
-            document.getElementById('posts').innerHTML = 'Error Loading Data'
+            document.getElementById('posts').innerHTML = 'Error Loading Tickets Data'
         })
 }
 
@@ -27,7 +27,7 @@ function fetchTicket(ticketid) {
         })
         .catch((error) => {
             console.log(`Error Fetching data : ${error}`)
-            document.getElementById('posts').innerHTML = 'Error Loading Data'
+            document.getElementById('posts').innerHTML = 'Error Loading Single Ticket Data'
         })
 }
 
@@ -121,3 +121,4 @@ function handlePages() {
 }
 
 handlePages()
+

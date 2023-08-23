@@ -79,9 +79,9 @@
   </head>
   <body>
     <div class="container">
-      <h1 th:text="#{error.title}">What??<span>:(</span></h1>
+      <h1 th:text="#{error.title}">Broken URL Your request cannot be processed <span>:(</span></h1>
 
-      <p th:text="#{error.subtitle}">We cannot even serve a 404 here. Something is being forbidden.</p>
+      <p th:text="#{error.subtitle}">Sorry, an error has occurred.</p>
 
       <span th:text="#{error.status}">Status:</span>&nbsp;<span th:text="${error}"></span>&nbsp;(<span th:text="${error}"></span>)<br />
       <span th:if="${!#strings.isEmpty(message)}">

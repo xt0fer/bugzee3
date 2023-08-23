@@ -15,6 +15,36 @@ function fetchTicketsData() {
         })
 }
 
+
+function fetchTicket(ticketid) {
+    fetch(`${API_URL}/api/tickets/${ticketid}`)
+        .then((res) => {
+            //console.log("res is ", Object.prototype.toString.call(res));
+            return res.json();
+        })
+        .then((data) => {
+            showTicketDetail(data)
+        })
+        .catch((error) => {
+            console.log(`Error Fetching data : ${error}`)
+            document.getElementById('posts').innerHTML = 'Error Loading Data'
+        })
+}
+
+function parseTicketId() {
+    try {
+        var url_string = (window.location.href).toLowerCase();
+        var url = new URL(url_string);
+        var ticketid = url.searchParams.get("ticketid");
+        // var geo = url.searchParams.get("geo");
+        // var size = url.searchParams.get("size");
+        // console.log(name+ " and "+geo+ " and "+size);
+        return ticketid
+      } catch (err) {
+        console.log("Issues with Parsing URL Parameter's - " + err);
+        return "0"
+      }
+}
 // takes a UNIX integer date, and produces a prettier human string
 function dateOf(date) {
     const milliseconds = date * 1000 // 1575909015000
@@ -37,7 +67,7 @@ function showTicketList(data) {
         let title = document.createElement('h3');
         let body = document.createElement('p');
         let by = document.createElement('p');
-        title.innerHTML = `<a href="/api/tickets/${post.id}">${post.title}</a>`;
+        title.innerHTML = `<a href="/ticketdetail.html?ticketid=${post.id}">${post.title}</a>`;
         body.innerHTML = `${post.description}`;
         //let postedTime = dateOf(post.time)
         by.innerHTML = `${post.date} - ${post.reportedBy}`;
@@ -60,11 +90,11 @@ function showTicketDetail(post) {
     const detail = document.createDocumentFragment();
 
     console.log("Ticket:", post);
-    let li = document.createElement('li');
-    let title = document.createElement('h3');
+    let li = document.createElement('div');
+    let title = document.createElement('h2');
     let body = document.createElement('p');
     let by = document.createElement('p');
-    title.innerHTML = `<a href="/api/tickets/${post.id}">${post.title}</a>`;
+    title.innerHTML = `${post.title}`;
     body.innerHTML = `${post.description}`;
     //let postedTime = dateOf(post.time)
     by.innerHTML = `${post.date} - ${post.reportedBy}`;
@@ -77,4 +107,17 @@ function showTicketDetail(post) {
     ul.appendChild(detail);
 }
 
-fetchTicketsData()
+function handlePages() {
+    let ticketid = parseTicketId()
+    console.log("ticketId: ",ticketid)
+
+    if (ticketid != null) {
+        console.log("found a ticketId")
+        fetchTicket(ticketid)
+    } else {
+        console.log("load all tickets")
+        fetchTicketsData()
+    }
+}
+
+handlePages()

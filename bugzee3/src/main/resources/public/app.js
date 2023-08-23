@@ -121,4 +121,3 @@ function handlePages() {
 }
 
 handlePages()
-
